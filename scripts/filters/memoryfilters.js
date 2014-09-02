@@ -9,8 +9,12 @@
  * Filter in the memoryAppApp.
  */
 angular.module('memoryAppApp')
-  .filter('memoryFilters', function () {
-    return function (input) {
-      return 'memoryFilters filter: ' + input;
-    };
-  });
+    .filter('doubleSize', function () {
+    return  input.concat(input);
+    })
+    .filter('fill', function (number) {
+        for(var i=0;i<number;i++){
+            input[i].push(i+1);
+        }
+        return input;
+    });

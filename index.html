@@ -20,25 +20,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-	<button class="btn btn-default">sss</button>
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">memoryApp</h3>
-      </div>
-
-      <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+    <select ng-options="i as i in [] | fill: 20" ng-model="number">
+    <div ng-repeat="item in array|limitTo:number|doubleSize|shuffle" ng-change="update(number)">
+        <div ng-click="reveal($index)" ng-class="{hidden: cards[$index].hidden }"
+             ng-style="{'background-image': 'url({{reveal ? card[$index].url : \'\' }})' }"
+             ng-init="card[$index].url = item.url">
+            {{reveal ? card[$index].url : "" }}
+        </div>
     </div>
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
