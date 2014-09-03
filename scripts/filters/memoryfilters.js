@@ -14,20 +14,17 @@ angular.module('memoryApp')
             return input.concat(input);
         }
     })
-    .filter('fill', function () {
-        return function(input, number){
+    .filter('fill', function (photoService) {
+        var photo = photoService;
+        return function(input, number, url){
             for(var i=0;i<number;i++){
                 input.push();
-                input[i]=i+1;
+                if(angular.isDefined(url)){
+                    input[i] = photo[i];
+                }
+                else
+                    input[i]=i+1;
             }
             return input;
-        }
-    })
-    .filter('addUrl',function(pictures){
-        return function(input){
-            var size = input.length;
-            for(var i=0;i<size;i++){
-                input[i].url = pictures[i];
-            }
         }
     });

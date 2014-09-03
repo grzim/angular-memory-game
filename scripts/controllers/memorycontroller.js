@@ -8,16 +8,11 @@
  * Controller of the memoryAppApp
  */
 
-var hiddenAtributes={
-    "opacity": 0,
-    "cursor" : "initial"
-}
 
-var pictures={
-
-}
 angular.module('memoryApp')
-  .controller('MemoryCtrl', function ($scope, $timeout) {
+  .controller('MemoryCtrl', function ($scope, $timeout, photoService, hiddenAttributes) {
+        var hiddenAtt = hiddenAttributes;
+        var images = photoService;
         var buffer = {};
         var revealed = 0;
         var pernamentHide = false;
@@ -42,7 +37,7 @@ angular.module('memoryApp')
                 }
 
             }
-            target.css({"backgroung-image":"url(images/cake_"+index+")"});
+            target.css({"backgroung-image":"url("+images[i]+")"});
             $scope.revealed++;
 
             $timeout(function() {
@@ -50,12 +45,16 @@ angular.module('memoryApp')
                 if (revealed == 2) {
                     revealed = 0;
                     if(pernamentHide){
-                        buffer.css(hiddenAtributes); //zmienic na zmienne zeby cotroller nie zmienial DOMu
-                        target.css(hiddenAtributes);
+                        buffer.css(hiddenAtt); //zmienic na zmienne zeby cotroller nie zmienial DOMu
+                        target.css(hiddenAtt);
                         pernamentHide = false;
                     }
                     buffer={};
                 }
             },1500)
         }
+    })
+    .controller('CardCtrl', function(){
+        $scope.revealedCards = 0;
+
     });

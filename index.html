@@ -25,7 +25,7 @@
            <select ng-options="i as i for i in []| fill: 20" ng-model="number" ng-init="update(number)"  ng-change="update(number)"> </select>
         </div>
         <div class="main-container">
-            <div ng-repeat="item in []|fill:number|addUrl|doubleSize track by $index">
+            <div ng-repeat="item in []|fill:number:true|doubleSize track by $index" ng-controller="CardCtrl">
                 <!--change t directive-->
                 <div class="card col-xs-4"
                      ng-model="card"
@@ -57,6 +57,8 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/memorycontroller.js"></script>
         <script src="scripts/filters/memoryfilters.js"></script>
+      <script src="scripts/services/memoryservice.js"></script>
+      <script src="scripts/directives/memorydirective.js"></script>
         <!-- endbuild -->
 </body>
 </html>
