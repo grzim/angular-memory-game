@@ -12,3 +12,4 @@ angular
   .module('memoryApp', [
     'ngAnimate'
   ]);
+

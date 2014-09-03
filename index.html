@@ -25,13 +25,12 @@
            <select ng-options="i as i for i in []| fill: 20" ng-model="number" ng-init="update(number)"  ng-change="update(number)"> </select>
         </div>
         <div class="main-container">
-            <div ng-repeat="item in []|fill:20|limitTo:number">
+            <div ng-repeat="item in []|fill:number|addUrl|doubleSize track by $index">
+                <!--change t directive-->
                 <div class="card col-xs-4"
-                     ng-click="reveal($index)"
-                     ng-class="{hidden: card[$index].hidden, 'col-sm-3 big':number<10, 'col-sm-2 small':number > 9 }"
-                     ng-style="{'background-image': 'url({{reveal ? card[$index].url : null }})' }"
-                     ng-init="card[$index].url = item.url">
-                    {{reveal ? card[$index].url : "" }}
+                     ng-model="card"
+                     ng-click="reveal($event)"
+                     ng-class="{ hidden: card[$index].hidden, 'col-sm-3 big':number<10, 'col-sm-2 small':number > 9 }">
                 </div>
             </div>
         </div>

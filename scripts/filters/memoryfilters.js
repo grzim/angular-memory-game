@@ -11,7 +11,7 @@
 angular.module('memoryApp')
     .filter('doubleSize', function () {
         return function(input){
-            input.concat(input);
+            return input.concat(input);
         }
     })
     .filter('fill', function () {
@@ -21,5 +21,13 @@ angular.module('memoryApp')
                 input[i]=i+1;
             }
             return input;
+        }
+    })
+    .filter('addUrl',function(pictures){
+        return function(input){
+            var size = input.length;
+            for(var i=0;i<size;i++){
+                input[i].url = pictures[i];
+            }
         }
     });

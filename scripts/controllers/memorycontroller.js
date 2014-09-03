@@ -7,6 +7,15 @@
  * # MemorycontrollerCtrl
  * Controller of the memoryAppApp
  */
+
+var hiddenAtributes={
+    "opacity": 0,
+    "cursor" : "initial"
+}
+
+var pictures={
+
+}
 angular.module('memoryApp')
   .controller('MemoryCtrl', function ($scope, $timeout) {
         var buffer = {};
@@ -14,32 +23,35 @@ angular.module('memoryApp')
         var pernamentHide = false;
         $scope.revealed = 0;
         $scope.number=10;
-        $scope.card = [];
+        $scope.cards = [];
         $scope.update=function(number){
-            for(var i=0;i<number;i++){
-                $scope.card.push({hidden:false,url:""});
+            for(var i=0;i<number*2;i++){
+                $scope.cards.push({hidden:false,url:""});
             }
         }
-        $scope.reveal = function(index){
-            console.log(index);
+        $scope.reveal = function(elem, index){
+            var target = elem.target;
+            if(target.css('opacity')==0) return;
+            if(index>=$scope.number)
+                index = index - $scope.number;
             if($scope.revealed==0)
-                buffer = $scope.card[index];
+                buffer = target;
             else{
-                if(buffer == $scope.card[index]){
+                if(buffer === target){
                     pernamentHide=true;
                 }
 
             }
-            $scope.card[index].reveal = true; //jak nie zadziaala style to jqlite css
-            revealed++;
+            target.css({"backgroung-image":"url(images/cake_"+index+")"});
+            $scope.revealed++;
 
             $timeout(function() {
-                $scope.card[index].reveal = false;//jak nie zadziaala style to jqlite css
+                target.css({"backgroung-image": none});
                 if (revealed == 2) {
                     revealed = 0;
                     if(pernamentHide){
-                        buffer.hidden = true;
-                        $scope.card[index].hidden = true;
+                        buffer.css(hiddenAtributes); //zmienic na zmienne zeby cotroller nie zmienial DOMu
+                        target.css(hiddenAtributes);
                         pernamentHide = false;
                     }
                     buffer={};
