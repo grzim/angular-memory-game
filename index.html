@@ -15,31 +15,27 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="memoryAppApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <body ng-app="memoryApp" ng-controller="MemoryCtrl">
+      <div class="page-container">
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <select ng-options="i as i in [] | fill: 20" ng-model="number">
-    <div ng-repeat="item in array|limitTo:number|doubleSize|shuffle" ng-change="update(number)">
-        <div ng-click="reveal($index)" ng-class="{hidden: cards[$index].hidden }"
-             ng-style="{'background-image': 'url({{reveal ? card[$index].url : \'\' }})' }"
-             ng-init="card[$index].url = item.url">
-            {{reveal ? card[$index].url : "" }}
+        <div class="config-container">
+           <select ng-options="i as i for i in []| fill: 20" ng-model="number" ng-init="update(number)"  ng-change="update(number)"> </select>
+        </div>
+        <div class="main-container">
+            <div ng-repeat="item in []|fill:20|limitTo:number">
+                <div class="card col-xs-4"
+                     ng-click="reveal($index)"
+                     ng-class="{hidden: card[$index].hidden, 'col-sm-3 big':number<10, 'col-sm-2 small':number > 9 }"
+                     ng-style="{'background-image': 'url({{reveal ? card[$index].url : null }})' }"
+                     ng-init="card[$index].url = item.url">
+                    {{reveal ? card[$index].url : "" }}
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>

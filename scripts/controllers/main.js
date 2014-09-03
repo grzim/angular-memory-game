@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the memoryAppApp
  */
-angular.module('memoryAppApp')
+angular.module('memoryApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
