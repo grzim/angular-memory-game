@@ -7,23 +7,33 @@
  * # memoryDirective
  */
 angular.module('memoryApp')
-  .directive('memoryDirective', function (hiddenAttributes) {
+  .directive('card', function () {
     return {
       scope: true,
-      template: '<div></div>',
+      template: '<div class="card" ng-click="reveal()" ng-class="{ \'col-sm-3 big\':number<10, \'col-sm-2 small\':number > 9 }" ng-style="{\'background-image\': revealed ? url : \'none\'  }"></div>',
       restrict: 'E',
       link: function (scope, element, attrs) {
+        scope.url = 'url('+attrs.url+')';
+        var url = 'url('+attrs.url+')';
         scope.revealed = false;
         scope.gone = false;
-        function reveal(){
-            if(scope.revealedCards==1){
-              return;
-            }
-            var target = $event.target;
-            scope.revealedCards++;
+        scope.reveal = function(){
+            console.log('aaaaaaa')
+            scope.revealed = true;
+            scope.$emit("revelation")
         }
-
-        element.on('click',reveal);
+        scope.hide = function(){
+            scope.revealed = false;
+        }
+        scope.pernamentHide = function(){
+            scope.$off('click',reveal);
+            scope.$off('hide', pernamentlyHide);
+            scope.revealed = false;
+            scope.gone = true;
+        }
+        scope.$on('click',scope.reveal);
+        scope.$on('hide',scope.hide);
+        scope.$on('pernamentHide', scope.pernamentHide);
       }
     };
   });

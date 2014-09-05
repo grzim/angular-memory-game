@@ -21,7 +21,6 @@ body {
   background-color: #f5e8e4;
 }
 .card {
-  background-image: none;
   background-size: cover;
   background-color: #00cde6;
   border: solid white 5px;
@@ -33,6 +32,9 @@ body {
 }
 .card.big {
   height: 180px;
+}
+.card.tapped {
+  background-image: none;
 }
 .page-container {
   margin-left: auto;
