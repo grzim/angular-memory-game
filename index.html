@@ -15,19 +15,18 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="memoryApp" ng-controller="MemoryCtrl">
+  <body ng-app="memoryApp">
       <div class="page-container">
         <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="config-container">
-           <select ng-options="i as i for i in []| fill: 20" ng-model="number"> </select>
+        <div class="config-container" ng-controller="ConfigCtrl">
+           <label>Select number of pairs: </label><select class="form-control number-dropdown" ng-options="i as i for i in []| fill: 20" ng-model="number.value" ng-change="reset()"> </select>
         </div>
-        <div class="main-container">
-            <div ng-click="t"  ng-repeat="url in []|fill:number:true|doubleSize track by $index" ng-controller="CardCtrl">
-                <!--change t directive-->
-                <card url='{{url}}'></card>
+        <div class="main-container container-fluid " ng-controller="CardCtrl">
+            <div ng-repeat="url in cards track by $index">
+                <card url='{{url}}' ng-init="init()"></card>
             </div>
         </div>
     </div>

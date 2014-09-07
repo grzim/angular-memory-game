@@ -36,6 +36,15 @@ body {
 .card.tapped {
   background-image: none;
 }
+.card.gone {
+  opacity: 0;
+  cursor: initial;
+}
+.number-dropdown {
+  width: auto;
+  display: inline-block;
+  margin-left: 10px;
+}
 .page-container {
   margin-left: auto;
   margin-right: auto;
